@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Практика написания китайских иероглифов от Ю Дундун</title>
-
-  <!-- 从 CDN 加载 Hanzi Writer -->
-  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js"></script>
-
-  <style>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>汉字笔顺练习</title><script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.7/dist/hanzi-writer.min.js"></script><script src="https://unpkg.com/pinyin-pro@3/dist/pinyin-pro.js"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-gb-web@latest/style.css"><style>
     :root {
       --bg: #f4f7fb;
       --card: #ffffff;
@@ -313,29 +303,12 @@
         width: 100%;
       }
     }
-  </style>
-</head>
-
-<body>
-  <main class="container">
-    <h1>汉字笔顺练习</h1>
-
-    <!-- 教师生成页 -->
-    <section id="teacher-panel" class="card">
-      <h2>创建练习</h2>
-
-      <label for="characters-input">输入汉字、词语或句子</label>
-      <textarea
-        id="characters-input"
-        placeholder="例如：你好中国学习汉语&#10;程序会自动提取其中的汉字。"
-      ></textarea>
-      <p class="help">
-        可以输入“你好，中国！学习汉语。”；标点、空格、拼音和其他非汉字字符会自动忽略。
-      </p>
-
-      <div class="settings">
+  
+body{background:radial-gradient(ellipse at top,#e5efff,transparent 65%),#f5f7fb}.container{width:min(1080px,calc(100% - 24px))}.card{border-radius:24px;box-shadow:0 12px 40px #243c6510}button{border-radius:12px}button:disabled{opacity:.45;cursor:not-allowed}.kai{font-family:KaiTi,STKaiti,"LXGW WenKai GB",serif;font-weight:normal}.boards{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:clamp(12px,3vw,24px);width:100%;margin:24px 0}.char-card{flex:0 1 266px;width:266px;max-width:100%;min-width:0;padding:12px;border:2px solid #e2e8f0;background:#fff;border-radius:20px;box-shadow:0 4px 16px #33415508;text-align:center;position:relative}.char-card.active{border-color:#60a5fa}.char-card.done{border-color:#22c55e;background:#f7fff9}.char-card.selected{border-color:#8b5cf6;box-shadow:0 0 0 4px #8b5cf622;background:#faf7ff}.char-card.playing{box-shadow:0 0 0 4px #2563eb25;border-color:#2563eb}.char-label{margin:0 0 8px;min-height:36px;padding:4px 10px;background:#f1f5f9!important;color:#475569!important;font-weight:normal;width:100%}.char-label[aria-pressed=true]{background:#ede9fe!important;color:#6d28d9!important}.board-stack{position:relative;width:100%;aspect-ratio:1;border:1px solid #d6e2f0;border-radius:10px;overflow:hidden;background:linear-gradient(to right,transparent 49.7%,#dbeafe 49.7%,#dbeafe 50.3%,transparent 50.3%),linear-gradient(to bottom,transparent 49.7%,#dbeafe 49.7%,#dbeafe 50.3%,transparent 50.3%),white}.board,.demo{position:absolute;inset:0;touch-action:none}.demo{background:#fff;z-index:2;display:none}.demo.visible{display:block}.word{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:18px 0 8px}.word ruby{font-size:clamp(38px,7vw,64px);line-height:1.8;cursor:pointer;border-radius:12px;padding:0 5px}.word ruby.selected{background:#ede9fe;box-shadow:0 0 0 2px #8b5cf6}.word rt{font:18px Arial,sans-serif;color:#2563eb}.meaning{text-align:center;font-size:21px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;color:#475569}.editor{padding:18px;margin:16px 0;background:#f8faff;border:1px solid #e1e9f5;border-radius:16px}.editor h3{margin:0 0 14px}.py-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}.py-cell{width:88px;text-align:center}.py-cell span{display:block;font-size:32px}.py-cell input{text-align:center;padding:8px 4px}.practice-top{padding-bottom:18px;border-bottom:1px solid #edf2f7}.mode{text-align:center;padding:12px;border-radius:12px;background:#f4f0ff;color:#6d28d9;font-size:14px;line-height:1.6;margin-top:16px}.message{max-width:720px}@media(max-width:420px){.card{padding:16px}.char-card{flex-basis:240px}.buttons{display:grid;grid-template-columns:1fr}.buttons button{width:100%}.stat{font-size:12px}.word{gap:8px}}
+</style></head><body><main class="container"><h1 id="heading">汉字笔顺练习</h1>
+<section id="teacher-panel" class="card"><h2>创建练习</h2><label for="characters-input">输入汉字、词组、成语或句子（每行一项）</label><textarea id="characters-input" placeholder="可以&#10;不可以&#10;可不可以"></textarea><p class="help">每行一项，每项最多20字，最多50项。重复字保留，标点不进入书写格。书写格居中，窄屏自动换行。</p><button id="prepare-button" class="secondary">整理练习并自动标音</button><p id="teacher-status" class="help"></p><div id="editors"></div><div class="settings">
         <div>
-          <label for="repeat-input">每个字练习次数</label>
+          <label for="repeat-input">每项练习次数</label>
           <select id="repeat-input">
             <option value="1">1 次</option>
             <option value="2">2 次</option>
@@ -362,413 +335,44 @@
         </div>
       </div>
 
-      <button id="generate-button">生成学生练习链接</button>
-
-      <div id="share-box" class="hidden">
-        <label for="share-link" style="margin-top: 22px;">学生练习链接</label>
-        <div class="share-row">
-          <input id="share-link" type="text" readonly>
-          <button id="copy-button" class="success">复制链接</button>
-        </div>
-        <p class="help">
-          将此链接发送给学生即可。学生直接用手机或电脑浏览器打开，不需要账号。
-        </p>
-      </div>
-    </section>
-
-    <!-- 学生练习页 -->
-    <section id="practice-panel" class="card hidden">
-      <div class="practice-top">
-        <div id="progress-text" class="progress">第 1 / 1 个字</div>
-        <div class="stats">
-          <span id="mistakes-stat" class="stat">错误：0</span>
-          <span id="repeat-stat" class="stat">第 1 次练习</span>
-        </div>
-      </div>
-
-      <h2 id="current-character" class="current-character">你</h2>
-
-      <div class="writer-wrap">
-        <div id="writer-target"></div>
-      </div>
-
-      <div id="message" class="message">
-        点击“观看笔顺”，然后点击“开始书写”。
-      </div>
-
-      <div class="buttons">
-        <button id="animate-button" class="secondary">Смотреть порядок черт</button>
-        <button id="hint-button" class="secondary">Подсказка текущей черты</button>
-        <button id="start-button">Начать писать</button>
-        <button id="restart-button" class="secondary">Написать заново</button>
-      </div>
-
-      <p class="footer-note">
-        Пишите иероглиф в правильном порядке черт. Программа допускает небольшие различия в написании; после нескольких ошибок появится подсказка.
-      </p>
-    </section>
-
-    <!-- 全部完成页 -->
-    <section id="complete-panel" class="card hidden">
-      <div class="complete-box">
-        <h2>恭喜，你完成了练习！</h2>
-        <p id="complete-summary">本次练习已完成。</p>
-
-        <div id="result-detail" class="result"></div>
-
-        <div class="buttons">
-          <button id="practice-again-button">Повторить с начала</button>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const teacherPanel = document.getElementById("teacher-panel");
-    const practicePanel = document.getElementById("practice-panel");
-    const completePanel = document.getElementById("complete-panel");
-
-    const charactersInput = document.getElementById("characters-input");
-    const repeatInput = document.getElementById("repeat-input");
-    const leniencyInput = document.getElementById("leniency-input");
-    const outlineInput = document.getElementById("outline-input");
-
-    const generateButton = document.getElementById("generate-button");
-    const shareBox = document.getElementById("share-box");
-    const shareLink = document.getElementById("share-link");
-    const copyButton = document.getElementById("copy-button");
-
-    const currentCharacterEl = document.getElementById("current-character");
-    const progressText = document.getElementById("progress-text");
-    const mistakesStat = document.getElementById("mistakes-stat");
-    const repeatStat = document.getElementById("repeat-stat");
-    const messageEl = document.getElementById("message");
-
-    const animateButton = document.getElementById("animate-button");
-    const hintButton = document.getElementById("hint-button");
-    const startButton = document.getElementById("start-button");
-    const restartButton = document.getElementById("restart-button");
-    const practiceAgainButton = document.getElementById("practice-again-button");
-
-    let characters = [];
-    let repeatCount = 3;
-    let leniency = 1;
-    let showOutline = true;
-
-    let currentCharacterIndex = 0;
-    let currentRepeat = 1;
-    let totalMistakes = 0;
-    let characterMistakes = 0;
-    let startTime = null;
-    let writer = null;
-    let quizRunning = false;
-
-    function extractHanzi(text) {
-      return [...text].filter(char => /[\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]/.test(char));
-    }
-
-    function setMessage(text, type = "") {
-      messageEl.textContent = text;
-      messageEl.className = "message";
-
-      if (type) {
-        messageEl.classList.add(type);
-      }
-    }
-
-    function getPracticeUrl(chars, repeat, strictness, outline) {
-      const url = new URL(window.location.href);
-      url.search = "";
-
-      url.searchParams.set("chars", chars.join(""));
-      url.searchParams.set("repeat", repeat);
-      url.searchParams.set("leniency", strictness);
-      url.searchParams.set("outline", outline ? "1" : "0");
-
-      return url.toString();
-    }
-
-    function readPracticeFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      const charsFromUrl = params.get("chars");
-
-      if (!charsFromUrl) {
-        return false;
-      }
-
-      characters = extractHanzi(charsFromUrl);
-
-      if (characters.length === 0) {
-        return false;
-      }
-
-      repeatCount = Math.min(Math.max(parseInt(params.get("repeat")) || 3, 1), 5);
-      leniency = parseFloat(params.get("leniency")) || 1;
-      showOutline = params.get("outline") !== "0";
-
-      return true;
-    }
-
-    function updateStats() {
-      const totalRounds = characters.length * repeatCount;
-      const completedRounds = currentCharacterIndex * repeatCount + currentRepeat;
-
-      progressText.textContent = `进度：${completedRounds} / ${totalRounds}`;
-      mistakesStat.textContent = `错误：${totalMistakes}`;
-      repeatStat.textContent = `“${characters[currentCharacterIndex]}”第 ${currentRepeat} / ${repeatCount} 次`;
-    }
-
-    function cleanWriterArea() {
-      const target = document.getElementById("writer-target");
-      target.innerHTML = "";
-    }
-
-    function getWriterSize() {
-      return Math.min(340, Math.floor(window.innerWidth * 0.82));
-    }
-
-    function createWriter() {
-      quizRunning = false;
-      characterMistakes = 0;
-      cleanWriterArea();
-
-      const character = characters[currentCharacterIndex];
-      const size = getWriterSize();
-
-      currentCharacterEl.textContent = character;
-      updateStats();
-
-      writer = HanziWriter.create("writer-target", character, {
-        width: size,
-        height: size,
-        padding: 16,
-        showCharacter: false,
-        showOutline: showOutline,
-        strokeColor: "#1e293b",
-        outlineColor: "#cbd5e1",
-        highlightColor: "#2563eb",
-        drawingColor: "#111827",
-        drawingWidth: 5,
-        strokeAnimationSpeed: 1.3,
-        strokeHighlightSpeed: 2.5,
-        delayBetweenStrokes: 300,
-        showHintAfterMisses: 2,
-        onLoadCharDataError: function() {
-          setMessage(
-            `无法加载“${character}”的笔顺数据。请检查网络，或确认该字在 Hanzi Writer 字库中可用。`,
-            "bad"
-          );
-        }
-      });
-
-      setMessage(`当前练习：“${character}”。Текущий иероглиф: «${character}». Сначала посмотрите порядок черт, затем начинайте писать.`);
-    }
-
-    function startQuiz() {
-      if (!writer || quizRunning) {
-        return;
-      }
-
-      quizRunning = true;
-      characterMistakes = 0;
-
-      writer.hideCharacter({ duration: 0 });
-
-      if (showOutline) {
-        writer.showOutline({ duration: 0 });
-      } else {
-        writer.hideOutline({ duration: 0 });
-      }
-
-      setMessage("Начните писать с первой черты.", "");
-
-      writer.quiz({
-        leniency: leniency,
-        showHintAfterMisses: 2,
-        highlightOnComplete: true,
-
-        onCorrectStroke: function(data) {
-          const nextStroke = data.strokeNum + 1;
-          setMessage(`${nextStroke} написана правильно. Продолжайте.`, "good");
-        },
-
-        onMistake: function(data) {
-          totalMistakes += 1;
-          characterMistakes += 1;
-          mistakesStat.textContent = `错误：${totalMistakes}`;
-
-          if (data.mistakesOnStroke >= 2) {
-            setMessage(
-              `Эта черта всё ещё неверна. Обратите внимание на начальную точку, направление и порядок черт; программа покажет подсказку.`,
-              "bad"
-            );
-          } else {
-            setMessage("Эта черта написана неверно. Попробуйте ещё раз.", "bad");
-          }
-        },
-
-        onComplete: function(data) {
-          quizRunning = false;
-          totalMistakes += Math.max(0, data.totalMistakes - characterMistakes);
-          mistakesStat.textContent = `错误：${totalMistakes}`;
-
-          setMessage(
-            `Иероглиф “${characters[currentCharacterIndex]}”попытка ${currentRepeat} завершена, ошибок ${data.totalMistakes}`,
-            "good"
-          );
-
-          window.setTimeout(goToNextRound, 1200);
-        }
-      });
-    }
-
-    function goToNextRound() {
-      if (currentRepeat < repeatCount) {
-        currentRepeat += 1;
-        createWriter();
-        return;
-      }
-
-      if (currentCharacterIndex < characters.length - 1) {
-        currentCharacterIndex += 1;
-        currentRepeat = 1;
-        createWriter();
-        return;
-      }
-
-      showCompletePage();
-    }
-
-    function showCompletePage() {
-      practicePanel.classList.add("hidden");
-      completePanel.classList.remove("hidden");
-
-      const elapsedSeconds = Math.max(1, Math.round((Date.now() - startTime) / 1000));
-      const minutes = Math.floor(elapsedSeconds / 60);
-      const seconds = elapsedSeconds % 60;
-
-      document.getElementById("complete-summary").textContent =
-        `你已完成 ${characters.length} 个汉字，共 ${characters.length * repeatCount} 轮书写练习。`;
-
-      document.getElementById("result-detail").innerHTML = `
-        <div>练习汉字：${characters.join("、")}</div>
-        <div>每个字练习：${repeatCount} 次</div>
-        <div>总错误次数：${totalMistakes} 次</div>
-        <div>练习用时：${minutes} 分 ${seconds} 秒</div>
-      `;
-    }
-
-    function startPractice() {
-      teacherPanel.classList.add("hidden");
-      completePanel.classList.add("hidden");
-      practicePanel.classList.remove("hidden");
-
-      currentCharacterIndex = 0;
-      currentRepeat = 1;
-      totalMistakes = 0;
-      characterMistakes = 0;
-      startTime = Date.now();
-
-      createWriter();
-    }
-
-    generateButton.addEventListener("click", function() {
-      const chars = extractHanzi(charactersInput.value);
-
-      if (chars.length === 0) {
-        alert("请至少输入一个汉字，例如：你好学习。");
-        charactersInput.focus();
-        return;
-      }
-
-      const repeat = repeatInput.value;
-      const strictness = leniencyInput.value;
-      const outline = outlineInput.checked;
-
-      const url = getPracticeUrl(chars, repeat, strictness, outline);
-
-      shareLink.value = url;
-      shareBox.classList.remove("hidden");
-      shareLink.select();
-    });
-
-    copyButton.addEventListener("click", async function() {
-      try {
-        await navigator.clipboard.writeText(shareLink.value);
-        copyButton.textContent = "已复制";
-        window.setTimeout(() => {
-          copyButton.textContent = "复制链接";
-        }, 1600);
-      } catch (error) {
-        shareLink.select();
-        document.execCommand("copy");
-        copyButton.textContent = "已复制";
-        window.setTimeout(() => {
-          copyButton.textContent = "复制链接";
-        }, 1600);
-      }
-    });
-
-    animateButton.addEventListener("click", function() {
-      if (!writer) return;
-
-      writer.cancelQuiz();
-      quizRunning = false;
-
-      writer.showOutline({ duration: 0 });
-      writer.hideCharacter({ duration: 0 });
-
-      setMessage("Демонстрация порядка черт: следите за последовательностью и направлением каждой черты.");
-      writer.animateCharacter({
-        onComplete: function() {
-          setMessage("Демонстрация завершена. Теперь можно начать писать.", "good");
-        }
-      });
-    });
-
-    hintButton.addEventListener("click", function() {
-      if (!writer) return;
-
-      setMessage("Показана подсказка для текущей черты.");
-      writer.showOutline({ duration: 0 });
-
-      if (!quizRunning) {
-        writer.animateStroke(0);
-      }
-    });
-
-    startButton.addEventListener("click", startQuiz);
-
-    restartButton.addEventListener("click", function() {
-      if (!writer) return;
-
-      writer.cancelQuiz();
-      quizRunning = false;
-      createWriter();
-      setMessage("Упражнение для этого иероглифа начато заново. Можно посмотреть порядок черт, затем нажать «Начать писать».");
-    });
-
-    practiceAgainButton.addEventListener("click", function() {
-      startPractice();
-    });
-
-    
-    window.addEventListener("resize", function() {
-      if (practicePanel.classList.contains("hidden") || !writer) {
-        return;
-      }
-
-      const size = getWriterSize();
-      writer.updateDimensions({
-        width: size,
-        height: size,
-        padding: 16
-      });
-    });
-
-    if (readPracticeFromUrl()) {
-      startPractice();
-    }
-  </script>
-</body>
-</html>
+      <p class="help">自动拼音仅供参考，请逐字检查多音字、轻声和变调。俄语释义由教师填写。每轮完整写完一项，再重复。</p><button id="generate-button">生成学生练习链接</button> <button id="preview-button" class="secondary">预览学生页面</button><div id="share-box" class="hidden"><label for="share-link" style="margin-top:20px">学生练习链接</label><div class="share-row"><input id="share-link" readonly><button id="copy-button" class="success">复制链接</button></div><p id="share-note" class="help"></p></div></section>
+<section id="practice-panel" class="card hidden" lang="ru"><div class="practice-top"><div id="progress-text" class="progress"></div><div class="stats"><span id="mistakes-stat" class="stat"></span><span id="repeat-stat" class="stat"></span></div></div><div id="word" class="word kai" lang="zh-CN"></div><div id="meaning" class="meaning"></div><div id="mode" class="mode" role="status"></div><div id="boards" class="boards"></div><div id="message" class="message" role="status" aria-live="polite"></div><div class="buttons"><button id="animate-button" class="secondary">Смотреть порядок черт</button><button id="pause-button" class="secondary" disabled>Пауза</button><button id="hint-button" class="secondary">Показать контур</button><button id="start-button">Начать писать</button><button id="restart-button" class="secondary">Написать заново</button><button id="next-button" class="success hidden">Продолжить</button></div><p class="footer-note">Без выбора показываются все иероглифы по очереди. Нажмите на иероглиф или его клетку, чтобы выбрать только его; повторное нажатие снимает выбор. Во время письма выбирайте иероглиф по кнопке над клеткой, чтобы не прерывать движение пера. Выбор влияет только на показ, а не на порядок письма.</p></section>
+<section id="complete-panel" class="card hidden" lang="ru"><div class="complete-box"><h2>Поздравляем! Упражнение завершено!</h2><p id="complete-summary"></p><div id="result-detail" class="result"></div><button id="practice-again-button">Повторить с начала</button></div></section><section id="error-panel" class="card hidden" lang="ru"><h2>Не удалось открыть упражнение</h2><p>Ссылка повреждена. Попросите преподавателя прислать новую ссылку.</p></section></main><script>
+'use strict';
+const $=id=>document.getElementById(id),hanzi=t=>Array.from(t).filter(c=>/\p{Script=Han}/u.test(c));
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
+let items=[],source='',lesson,wi=0,round=1,active=0,mistakes=0,completed=0,startTime,epoch=0,writers=[],demos=[],ready=[],demoReady=[],done=[],running=false,selected=null;
+let playState='idle',playToken=0,playIndex=null,pauseWaiters=[];
+function message(t,type=''){$('message').textContent=t;$('message').className='message '+type;}
+function invalidate(){$('share-box').classList.add('hidden');}
+function prepare(){const lines=$('characters-input').value.split(/\r?\n/).map(t=>hanzi(t).join('')).filter(Boolean);if(!lines.length||lines.length>50||lines.some(t=>Array.from(t).length>20)){alert('请每行输入一项汉字；每项最多20字，最多50项。');return false;}const previous=items;items=[];$('editors').replaceChildren();let auto=!!window.pinyinPro;lines.forEach((text,i)=>{const old=previous[i]?.text===text?previous[i]:null;let py=old?.py||Array.from(text).map(()=>'');if(!old&&auto){try{py=pinyinPro.pinyin(text,{type:'array',toneType:'symbol'});}catch(e){auto=false;}}const item={text,py:[...py],ru:old?.ru||''};items.push(item);const box=el('div',undefined,'editor');box.append(el('h3',`${i+1}. ${text}`));const row=el('div',undefined,'py-row');Array.from(text).forEach((c,j)=>{const label=el('label',undefined,'py-cell');label.append(el('span',c,'kai'));const input=el('input');input.value=item.py[j]||'';input.setAttribute('aria-label',`${text} 第${j+1}字拼音`);input.oninput=()=>{item.py[j]=input.value.trim();invalidate();};label.append(input);row.append(label);});box.append(row);const label=el('label','俄语释义');const ru=el('textarea');ru.value=item.ru;ru.placeholder='例如：можно / нельзя / можно ли?';ru.oninput=()=>{item.ru=ru.value.trim();invalidate();};label.append(ru);box.append(label);$('editors').append(box);});source=$('characters-input').value;$('teacher-status').textContent=auto?'请检查、修改拼音并填写俄语释义。':'拼音库未加载，请检查网络或手动填写。';invalidate();return true;}
+function getLesson(){if(source!==$('characters-input').value||!items.length){if(!prepare())return null;}if(items.some(t=>t.py.some(p=>!p))){alert('请填写每个字的拼音。');return null;}return {v:2,items:items.map(t=>({...t,py:[...t.py]})),repeat:Number($('repeat-input').value),leniency:Number($('leniency-input').value),outline:$('outline-input').checked};}
+function encode(data){let s='';new TextEncoder().encode(JSON.stringify(data)).forEach(b=>s+=String.fromCharCode(b));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function decode(s){if(s.length>200000)throw Error();return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0))));}
+function validate(x){if(!x||x.v!==2||!Array.isArray(x.items)||!x.items.length||x.items.length>50||!Number.isInteger(x.repeat)||x.repeat<1||x.repeat>5||!Number.isFinite(x.leniency)||x.leniency<.5||x.leniency>2||typeof x.outline!=='boolean')throw Error();x.items.forEach(t=>{if(typeof t.text!=='string'||!t.text||t.text!==hanzi(t.text).join('')||Array.from(t.text).length>20||!Array.isArray(t.py)||t.py.length!==Array.from(t.text).length||t.py.some(p=>typeof p!=='string'||p.length>80)||typeof t.ru!=='string'||t.ru.length>3000)throw Error();});return x;}
+function student(){document.documentElement.lang='ru';document.title='Практика написания китайских иероглифов от Ю Дундун';$('heading').textContent='Практика написания иероглифов';$('teacher-panel').classList.add('hidden');}
+function wake(){const list=pauseWaiters;pauseWaiters=[];list.forEach(f=>f());}
+function stopDemo(){playToken++;playState='idle';wake();demos.forEach(w=>{try{w.resumeAnimation();w.hideCharacter({duration:0});}catch(e){}});document.querySelectorAll('.demo').forEach(n=>n.classList.remove('visible'));playIndex=null;controls();}
+function cancel(){stopDemo();epoch++;writers.forEach(w=>{try{w.cancelQuiz();}catch(e){}});running=false;}
+function stats(){$('progress-text').textContent=`Задание ${wi+1} / ${lesson.items.length} · Выполнено: ${completed}`;$('mistakes-stat').textContent=`Ошибок: ${mistakes}`;$('repeat-stat').textContent=`Повторение ${round} / ${lesson.repeat}`;}
+function controls(){const playing=playState!=='idle',ok=ready[active]&&!done[active];$('start-button').disabled=!ok||running||playing;$('hint-button').disabled=!ok||playing;$('restart-button').disabled=!ok||playing;const queue=selected===null?Array.from({length:demos.length},(_,i)=>i):[selected];$('animate-button').disabled=playing||!queue.length||queue.some(i=>!demoReady[i]);$('pause-button').disabled=!playing;$('pause-button').textContent=playState==='paused'?'Продолжить показ':'Пауза';$('next-button').disabled=playing;document.querySelectorAll('.char-card').forEach((n,i)=>{n.classList.toggle('active',i===active&&!done[i]);n.classList.toggle('selected',i===selected);n.classList.toggle('playing',playing&&i===playIndex);$('choose-'+i)?.setAttribute('aria-pressed',String(i===selected));$('ruby-'+i)?.classList.toggle('selected',i===selected);$('ruby-'+i)?.setAttribute('aria-pressed',String(i===selected));});$('mode').textContent=selected===null?'Режим: все иероглифы по очереди. Нажмите на нужный иероглиф, чтобы выбрать один.':`Выбран иероглиф ${selected+1}: «${Array.from(lesson.items[wi].text)[selected]}». Повторное нажатие вернёт показ всех иероглифов.`;}
+function choose(i){stopDemo();selected=selected===i?null:i;controls();message(selected===null?'Выбор снят. Кнопка показа запустит все иероглифы по порядку.':'Выбран один иероглиф. Нажмите «Смотреть порядок черт».');}
+function dimensions(){writers.forEach((w,i)=>{const t=$('stack-'+i);if(!t)return;const n=t.clientWidth;if(n>0){w.updateDimensions({width:n,height:n,padding:14});demos[i]?.updateDimensions({width:n,height:n,padding:14});}});}
+const observer=new ResizeObserver(()=>requestAnimationFrame(dimensions));
+function render(){cancel();observer.disconnect();writers=[];demos=[];ready=[];demoReady=[];done=Array(Array.from(lesson.items[wi].text).length).fill(false);active=0;selected=null;const token=epoch;$('practice-panel').classList.remove('hidden');$('complete-panel').classList.add('hidden');$('boards').replaceChildren();$('word').replaceChildren();$('next-button').classList.add('hidden');const item=lesson.items[wi];$('meaning').textContent=item.ru;Array.from(item.text).forEach((c,i)=>{const r=el('ruby');r.id='ruby-'+i;r.tabIndex=0;r.setAttribute('role','button');r.setAttribute('aria-label',`Выбрать иероглиф ${c}`);r.onclick=()=>choose(i);r.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(i);}};r.append(el('span',c),el('rt',item.py[i]));$('word').append(r);});stats();message('Загрузка данных иероглифов…');if(!window.HanziWriter){message('Не удалось загрузить модуль письма. Проверьте интернет и обновите страницу.','bad');controls();return;}Array.from(item.text).forEach((c,i)=>{const card=el('div',undefined,'char-card');card.id='card-'+i;const label=el('button',`${i+1}. ${c} · ${item.py[i]}`,'char-label');label.id='choose-'+i;label.title='Выбрать / снять выбор';label.onclick=()=>choose(i);card.append(label);const stack=el('div',undefined,'board-stack');stack.id='stack-'+i;const target=el('div',undefined,'board');target.id='board-'+i;const demo=el('div',undefined,'demo');demo.id='demo-'+i;stack.append(target,demo);card.append(stack);$('boards').append(card);let down=null;stack.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY,writing:running&&playState==='idle'};});stack.addEventListener('pointercancel',()=>down=null);stack.addEventListener('pointerup',e=>{if(down&&!down.writing&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<8)choose(i);down=null;});const size=stack.clientWidth;const opts={width:size,height:size,padding:14,showCharacter:false,showOutline:lesson.outline,strokeColor:'#1e293b',outlineColor:'#cbd5e1',highlightColor:'#2563eb',drawingColor:'#111827',drawingWidth:5,strokeAnimationSpeed:1.3,delayBetweenStrokes:250};try{writers[i]=HanziWriter.create(target,c,{...opts,onLoadCharDataSuccess:()=>{if(token!==epoch)return;ready[i]=true;controls();if(i===active)message('Нажмите «Начать писать» или посмотрите порядок черт.');},onLoadCharDataError:()=>{if(token!==epoch)return;ready[i]=false;controls();message(`Не удалось загрузить данные для «${c}». Проверьте интернет и обновите страницу.`,'bad');}});demos[i]=HanziWriter.create(demo,c,{...opts,showOutline:true,onLoadCharDataSuccess:()=>{if(token!==epoch)return;demoReady[i]=true;controls();},onLoadCharDataError:()=>{if(token!==epoch)return;demoReady[i]=false;controls();message(`Не удалось загрузить показ для «${c}». Проверьте интернет.`,'bad');}});}catch(e){message('Не удалось создать поле письма. Обновите страницу.','bad');}});observer.observe($('boards'));requestAnimationFrame(dimensions);controls();}
+function quiz(){if(!ready[active]||done[active]||playState!=='idle'||running)return;const i=active,w=writers[i],token=epoch;running=true;controls();w.hideCharacter({duration:0});if(lesson.outline)w.showOutline({duration:0});else w.hideOutline({duration:0});message(`Пишите иероглиф ${i+1}: «${Array.from(lesson.items[wi].text)[i]}».`);w.quiz({leniency:lesson.leniency,showHintAfterMisses:2,highlightOnComplete:true,onCorrectStroke:d=>{if(token===epoch)message(`Черта ${d.strokeNum+1} написана правильно.`,'good');},onMistake:()=>{if(token!==epoch)return;mistakes++;stats();message('Попробуйте ещё раз. Проверьте начало, направление и порядок черт.','bad');},onComplete:()=>{if(token!==epoch)return;running=false;done[i]=true;completed++;$('card-'+i).classList.add('done');stats();if(i+1<writers.length){active++;controls();quiz();}else{controls();message('Отлично! Все иероглифы написаны. Нажмите «Продолжить».','good');$('next-button').classList.remove('hidden');}}});}
+async function pauseGate(token){while(token===playToken&&playState==='paused')await new Promise(resolve=>pauseWaiters.push(resolve));return token===playToken;}
+async function animate(){if(playState!=='idle')return;const queue=selected===null?demos.map((_,i)=>i):[selected];if(!queue.length||queue.some(i=>!demoReady[i]))return;const token=++playToken;playState='playing';playIndex=null;document.querySelectorAll('.demo').forEach(n=>n.classList.add('visible'));demos.forEach(w=>{w.resumeAnimation();w.hideCharacter({duration:0});w.showOutline({duration:0});});controls();try{for(const i of queue){if(!await pauseGate(token))return;playIndex=i;controls();message(`Показ: «${Array.from(lesson.items[wi].text)[i]}» (${queue.indexOf(i)+1} / ${queue.length}).`);demos[i].hideCharacter({duration:0});const animation=demos[i].animateCharacter();if(playState==='paused')demos[i].pauseAnimation();await animation;if(token!==playToken)return;if(!await pauseGate(token))return;}if(token!==playToken)return;playState='idle';playIndex=null;document.querySelectorAll('.demo').forEach(n=>n.classList.remove('visible'));controls();message(running?'Показ завершён. Продолжайте писать: ваш прогресс сохранён.':'Показ завершён. Нажмите «Начать писать».','good');}catch(e){if(token!==playToken)return;stopDemo();message('Не удалось завершить показ. Попробуйте ещё раз.','bad');}}
+function togglePause(){if(playState==='idle')return;if(playState==='playing'){playState='paused';if(playIndex!==null)demos[playIndex].pauseAnimation();message('Показ приостановлен. Нажмите «Продолжить показ».');}else{playState='playing';if(playIndex!==null)demos[playIndex].resumeAnimation();wake();message('Показ продолжается.');}controls();}
+function start(){student();wi=0;round=1;mistakes=0;completed=0;startTime=Date.now();render();}
+$('start-button').onclick=quiz;$('animate-button').onclick=animate;$('pause-button').onclick=togglePause;
+$('restart-button').onclick=()=>{if(!ready[active]||playState!=='idle'||done[active])return;writers[active].cancelQuiz();running=false;quiz();};
+$('hint-button').onclick=()=>{writers[active]?.showOutline({duration:0});message('Показан контур. После двух ошибок появится подсказка движения.');};
+$('next-button').onclick=()=>{if(playState!=='idle'||!done.length||!done.every(Boolean))return;if(round<lesson.repeat){round++;render();}else if(wi+1<lesson.items.length){wi++;round=1;render();}else{cancel();observer.disconnect();$('practice-panel').classList.add('hidden');$('complete-panel').classList.remove('hidden');$('complete-summary').textContent=`Выполнено заданий: ${lesson.items.length}. Написано иероглифов с повторениями: ${completed}.`;const sec=Math.max(1,Math.round((Date.now()-startTime)/1000));$('result-detail').replaceChildren();[`Задания: ${lesson.items.map(t=>t.text).join(' / ')}`,`Повторений каждого задания: ${lesson.repeat}`,`Всего ошибок: ${mistakes}`,`Время: ${Math.floor(sec/60)} мин ${sec%60} с`].forEach(t=>$('result-detail').append(el('div',t)));}};
+$('practice-again-button').onclick=start;$('prepare-button').onclick=prepare;$('characters-input').oninput=invalidate;['repeat-input','leniency-input','outline-input'].forEach(id=>$(id).onchange=invalidate);
+function link(data){const u=new URL(location.href);u.search='';u.hash='lesson='+encode(data);return u.href;}
+$('generate-button').onclick=()=>{const data=getLesson();if(!data)return;$('share-link').value=link(data);$('share-box').classList.remove('hidden');$('share-note').textContent=(location.protocol==='file:'?'当前为本地文件。请先上传到网站，再生成可发送给其他设备的链接。':'将此链接发送给学生即可，无需账号。')+($('share-link').value.length>8000?' 链接较长，建议拆分练习以免被聊天软件截断。':'');};
+$('preview-button').onclick=()=>{const data=getLesson();if(data)window.open(link(data),'_blank','noopener');};
+$('copy-button').onclick=async()=>{try{await navigator.clipboard.writeText($('share-link').value);$('copy-button').textContent='已复制';}catch(e){$('share-link').select();$('copy-button').textContent=document.execCommand('copy')?'已复制':'请手动复制';}setTimeout(()=>$('copy-button').textContent='复制链接',1500);};
+try{const hp=new URLSearchParams(location.hash.slice(1)),qp=new URLSearchParams(location.search);if(hp.has('lesson')){lesson=validate(decode(hp.get('lesson')));start();}else if(qp.has('chars')){lesson=validate({v:2,items:hanzi(qp.get('chars')).map(c=>({text:c,py:[window.pinyinPro?pinyinPro.pinyin(c):''],ru:''})),repeat:Math.min(5,Math.max(1,parseInt(qp.get('repeat'))||3)),leniency:Math.min(2,Math.max(.5,parseFloat(qp.get('leniency'))||1)),outline:qp.get('outline')!=='0'});start();}}catch(e){student();$('practice-panel').classList.add('hidden');$('error-panel').classList.remove('hidden');}
+</script></body></html>
